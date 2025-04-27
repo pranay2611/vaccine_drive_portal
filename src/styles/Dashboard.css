@@ -89,6 +89,40 @@
     color: #555; /* Subtle gray for the date */
 }
 
+.upcoming-drives table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-drives table th,
+.upcoming-drives table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.upcoming-drives table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #555;
+}
+
+.upcoming-drives table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.empty-state {
+    color: #888;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
 .empty-state {
     font-size: 1rem;
     color: #777;

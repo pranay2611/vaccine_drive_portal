@@ -1,32 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Dashboard.css'; // Import the CSS file for styling
 
+interface VaccinationDrive {
+    id: number;
+    vaccineName: string;
+    driveDate: string;
+    availableDoses: number;
+    applicableClasses: string;
+}
+
 interface DashboardData {
     totalStudents: number;
     vaccinatedStudents: number;
     vaccinatedPercentage: number;
-    upcomingDriveDates: string[];
+    upcomingDrives: VaccinationDrive[];
 }
 
 const Dashboard: React.FC = () => {
     const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+    const [userRole, setUserRole] = useState<string | null>(null);
     const [error, setError] = useState<string>('');
 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
+                // Fetch dashboard data from /api/dashboard/data
                 const response = await fetch('http://localhost:8080/api/dashboard/data');
                 if (!response.ok) {
                     throw new Error('Failed to fetch dashboard data.');
                 }
                 const data: DashboardData = await response.json();
+
+                // Set the dashboard data
                 setDashboardData(data);
             } catch (err: any) {
                 setError(err.message);
             }
         };
 
+        const fetchUserRole = () => {
+            // Fetch user role from local storage
+            const storedRole = localStorage.getItem('userRole'); // Get the role from local storage
+            if (storedRole) {
+                setUserRole(storedRole.toLowerCase()); // Convert to lowercase for case-insensitive comparison
+            }
+        };
+
         fetchDashboardData();
+        fetchUserRole();
     }, []);
 
     return (
@@ -51,24 +72,42 @@ const Dashboard: React.FC = () => {
                     </div>
                     <div className="upcoming-drives">
                         <h3>Upcoming Vaccination Drives</h3>
-                        {dashboardData.upcomingDriveDates.length > 0 ? (
-                            <ul>
-                                {dashboardData.upcomingDriveDates.map((date, index) => (
-                                    <li key={index}>{date}</li>
-                                ))}
-                            </ul>
+                        {dashboardData.upcomingDrives.length > 0 ? (
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Vaccine Name</th>
+                                        <th>Drive Date</th>
+                                        <th>Available Doses</th>
+                                        <th>Applicable Classes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {dashboardData.upcomingDrives.map((drive) => (
+                                        <tr key={drive.id}>
+                                            <td>{drive.id}</td>
+                                            <td>{drive.vaccineName}</td>
+                                            <td>{drive.driveDate}</td>
+                                            <td>{drive.availableDoses}</td>
+                                            <td>{drive.applicableClasses}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         ) : (
                             <p className="empty-state">No upcoming drives scheduled.</p>
                         )}
                     </div>
-                    <div className="quick-links">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li><a href="/manage-students">Manage Students</a></li>
-                            <li><a href="/vaccination-drives">Manage Vaccination Drives</a></li>
-                            <li><a href="/reports">View Reports</a></li>
-                        </ul>
-                    </div>
+                    {userRole?.toLowerCase() !== 'student' && (
+                        <div className="quick-links">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="/manage-students">Manage Students</a></li>
+                                <li><a href="/vaccination-drives">Manage Vaccination Drives</a></li>
+                            </ul>
+                        </div>
+                    )}
                 </>
             ) : (
                 <p className="loading-message">Loading dashboard data...</p>

@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../styles/Signup.css';
 
-const Signup: React.FC = () => {
+interface SignupProps {
+    setActiveTab: (tab: 'signup' | 'login') => void; // Function to switch tabs
+}
+
+const Signup:React.FC<SignupProps> = ({ setActiveTab }) => {
+    const history = useHistory();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,6 +35,9 @@ const Signup: React.FC = () => {
             const data = await response.json();
             console.log('Signup successful:', data);
             setSuccess(true); // Indicate success
+            setTimeout(() => {
+                setActiveTab('login');
+            }, 1000);
         } catch (err: any) {
             setError(err.message);
         }
@@ -39,7 +48,7 @@ const Signup: React.FC = () => {
             <form className="auth-form" onSubmit={handleSubmit}>
                 <h2>Sign Up</h2>
                 {error && <p className="error-message">{error}</p>}
-                {success && <p className="success-message">Signup successful!</p>}
+                {success && <p className="success-message">Signup successful! Switching to login...</p>}
                 <input
                     type="text"
                     placeholder="Username"

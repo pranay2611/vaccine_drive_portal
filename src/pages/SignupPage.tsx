@@ -4,6 +4,13 @@ import Login from '../components/Login'; // Assuming you have a Login component
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SignupPage: React.FC = () => {
+    const setActiveTab = (tab: 'signup' | 'login') => {
+        const tabElement = document.querySelector(`#${tab}-tab`) as HTMLElement;
+        if (tabElement) {
+            tabElement.click(); // Programmatically click the tab to switch
+        }
+    };
+
     return (
         <div className="container mt-5">
             <h1 className="text-center mb-4">Vaccine Drive Portal</h1>
@@ -52,7 +59,7 @@ const SignupPage: React.FC = () => {
                     role="tabpanel"
                     aria-labelledby="signup-tab"
                 >
-                    <Signup />
+                    <Signup setActiveTab={setActiveTab} /> 
                 </div>
             </div>
         </div>

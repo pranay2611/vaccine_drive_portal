@@ -1,0 +1,132 @@
+/* General Container */
+.vaccination-drive-management-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.vaccination-drive-management-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* Center-align the title */
+}
+
+/* Form Section */
+.vaccination-drive-management-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the form */
+    gap: 20px; /* Add space between input fields */
+    margin-bottom: 30px;
+}
+
+.vaccination-drive-management-container form input,
+.vaccination-drive-management-container form button {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 80%; /* Reduce width for better alignment */
+    max-width: 400px; /* Limit the maximum width */
+}
+
+.vaccination-drive-management-container form input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.vaccination-drive-management-container form button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    width: 50%; /* Center-align the button with reduced width */
+    max-width: 200px; /* Limit the button width */
+}
+
+.vaccination-drive-management-container form button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Section */
+.vaccination-drive-management-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vaccination-drive-management-container table th,
+.vaccination-drive-management-container table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.vaccination-drive-management-container table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #555;
+}
+
+.vaccination-drive-management-container table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.vaccination-drive-management-container table td button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff; /* Blue button */
+    color: white;
+}
+
+.vaccination-drive-management-container table td button:hover {
+    background-color: #0056b3;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center; /* Center-align error messages */
+}
+
+.add-drive-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-drive-btn:hover {
+    background-color: #0056b3;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox and label vertically */
+    gap: 8px; /* Add space between the checkbox and the label */
+    margin-top: 10px; /* Optional: Add spacing above the checkbox */
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin: 0; /* Remove default margin for the checkbox */
+}
