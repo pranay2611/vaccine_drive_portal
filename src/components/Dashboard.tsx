@@ -50,6 +50,12 @@ const Dashboard: React.FC = () => {
         fetchUserRole();
     }, []);
 
+    const handleBookDrive = (driveId: number) => {
+        // Logic to handle booking a vaccination drive
+        console.log(`Booking drive with ID: ${driveId}`);
+        alert(`You have successfully booked the vaccination drive with ID: ${driveId}`);
+    };
+
     return (
         <div className="dashboard-container">
             <h1 className="dashboard-title">Dashboard Overview</h1>
@@ -81,6 +87,7 @@ const Dashboard: React.FC = () => {
                                         <th>Drive Date</th>
                                         <th>Available Doses</th>
                                         <th>Applicable Classes</th>
+                                        {userRole?.toLowerCase() === 'student' && <th>Actions</th>}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,6 +98,11 @@ const Dashboard: React.FC = () => {
                                             <td>{drive.driveDate}</td>
                                             <td>{drive.availableDoses}</td>
                                             <td>{drive.applicableClasses}</td>
+                                            {userRole?.toLowerCase() === 'student' && (
+                                                <td>
+                                                    <button className="book-btn" onClick={() => handleBookDrive(drive.id)}>Book</button>
+                                                </td>
+                                            )}
                                         </tr>
                                     ))}
                                 </tbody>
